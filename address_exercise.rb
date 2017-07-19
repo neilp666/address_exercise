@@ -1,5 +1,19 @@
 require 'rspec'
 
+module AddressFormatter
+  def self.format(address_obj)
+    str_address = <<~ADDRESS
+        {address_obj[:subpremise]}, {address_obj[:house_name]}
+        {address_obj[:house_number]}, {address_obj[:street_line_1]}
+        {address_obj[:street_line_2]}
+        {address_obj[:town_or_city]}
+        {address_obj[:region]}
+        {address_obj[:postcode]}
+    ADDRESS
+    str_address.gsub /^$\n/, ''
+  end
+end
+
 describe 'AddressFormatter' do
   it 'takes in an address as a hash and outputs a formatted string' do
     address_data = {
